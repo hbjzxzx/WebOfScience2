@@ -47,7 +47,9 @@ func StartService(address, port, hostName string, defaultLen int) {
 func StopService() {
 	if rpcServer != nil {
 		rpcServer.GracefulStop()
-		for _, v := tunnelIns.record.id2ins
+		for _, v := tunnelIns.record.id2ins{
+			v.S
+		}
 	}
 }
 
