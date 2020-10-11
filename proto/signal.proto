@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package wos;
+
+option go_package=".;pb";
+
+message TunnelChannelResponse{
+    string Port = 2;
+    string Host = 3;
+}
+
+message TunnelChannelRequest {
+    string Host = 1;
+    string TunnelName = 2;
+}
+
+service TunnelService{
+    rpc ListenTunnelMsg (TunnelChannelRequest) returns (stream TunnelChannelResponse) {}
+    rpc CloseTunnelMsg (TunnelChannelRequest) returns (TunnelChannelResponse) {}
+}
+
+message ConnectMeta{
+    string Host = 1;
+    string Port = 2;
+}
+
+message DataStreamMsg {
+    int64 StreamFD = 1;
+    oneof Meta {
+        ConnectMeta InitConnMeta = 2;
+        bytes Load = 3;
+    }   
+}
+
